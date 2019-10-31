@@ -1,7 +1,7 @@
 <?php
 
 /**
- * WHMCS tool used to allow all products within a group to upgrade or downgrade between eachother.
+ * WHMCS tool used to naturally resort by name all product groups
  * @author Shaun Reitan
  * @see https://github.com/ShaunR/whmcs-tools
  */
@@ -68,10 +68,13 @@ try {
 }
 
 
-// Lookup groups
-$groups = Group::all()->sortBy('name', SORT_NATURAL, true);
+// Groups
+$groups = Group::all()->sortBy('name', SORT_NATURAL | SORT_FLAG_CASE, false);
 
+// Start at 0
 $displayOrder = 0;
+
+// Loop through groups
 foreach ($groups as $group) {
 
     // Increment display order counter
